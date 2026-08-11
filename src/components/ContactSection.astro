@@ -1,0 +1,57 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+import { site } from "../data/site";
+
+const cards = [
+  {
+    label: "Email",
+    value: site.email.replace("@", "@​"),
+    href: `mailto:${site.email}`,
+  },
+  {
+    label: "Phone",
+    value: site.phone,
+    href: `tel:${site.phoneHref}`,
+  },
+  {
+    label: "LinkedIn",
+    value: site.linkedinHandle,
+    href: site.linkedin,
+  },
+  {
+    label: "GitHub",
+    value: site.githubHandle,
+    href: site.github,
+  },
+];
+---
+
+<section id="contact" class="scroll-mt-20 border-t border-border bg-surface">
+  <div class="mx-auto max-w-6xl px-6 py-20 sm:py-28">
+    <SectionHeading
+      eyebrow="Contact"
+      title="Let's talk"
+      description="Open to Business Analyst, Technical Business Analyst, Data Analyst, and Product Analyst roles. The fastest way to reach me is email."
+    />
+
+    <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        cards.map((card) => (
+          <a
+            href={card.href}
+            target={card.href.startsWith("http") ? "_blank" : undefined}
+            rel={card.href.startsWith("http") ? "noopener noreferrer" : undefined}
+            class="reveal flex flex-col rounded-2xl border border-border bg-paper p-6 transition-colors hover:border-ink"
+          >
+            <span class="text-xs font-semibold uppercase tracking-wide text-text-muted">
+              {card.label}
+            </span>
+            <span class="mt-2 break-words text-sm font-medium text-ink">{card.value}</span>
+          </a>
+        ))
+      }
+    </div>
+
+    <p class="reveal mt-8 text-sm text-text-muted">{site.location}</p>
+  </div>
+</section>

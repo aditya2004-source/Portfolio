@@ -1,0 +1,29 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+import { analyticsCategories } from "../data/analyticsCategories";
+---
+
+<section id="analytics-projects" class="border-t border-border bg-surface">
+  <div class="mx-auto max-w-6xl px-6 py-20 sm:py-28">
+    <SectionHeading
+      eyebrow="Analytics Projects"
+      title="Coming soon, by design"
+      description="This section grows as I actually build case studies — real analysis, not placeholders. Here's what I'm planning to work through next, grouped by domain."
+    />
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        analyticsCategories.map((category) => (
+          <div class="reveal rounded-2xl border border-dashed border-border p-6">
+            <p class="text-sm font-semibold text-ink">{category.name}</p>
+            <ul class="mt-4 space-y-2">
+              {category.topics.map((topic) => (
+                <li class="text-sm text-text-muted">{topic}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

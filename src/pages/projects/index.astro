@@ -1,0 +1,53 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import AnalyticsPreview from "../../components/AnalyticsPreview.astro";
+import { site } from "../../data/site";
+
+const featured = (await getCollection("projects", ({ data }) => data.status === "featured")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const inProgress = await getCollection("projects", ({ data }) => data.status === "in-progress");
+---
+
+<BaseLayout
+  title={`Projects — ${site.name}`}
+  description="Real, working projects built by Aditya Choudhary — plus the analytics case studies coming next."
+>
+  <section>
+    <div class="mx-auto max-w-6xl px-6 py-16 sm:py-20">
+      <SectionHeading
+        eyebrow="Featured Projects"
+        title="Things I've genuinely built"
+        description="Real, working projects — not tutorial follow-alongs. Each one has a full write-up: the problem, the solution, and what I actually built."
+      />
+
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          featured.map((project) => (
+            <ProjectCard
+              title={project.data.title}
+              tagline={project.data.tagline}
+              tech={project.data.tech}
+              href={`/projects/${project.id}`}
+            />
+          ))
+        }
+        {
+          inProgress.map((project) => (
+            <ProjectCard
+              title={project.data.title}
+              tagline={project.data.tagline}
+              href={`/projects/${project.id}`}
+              badge="In development"
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <AnalyticsPreview />
+</BaseLayout>

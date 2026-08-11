@@ -1,0 +1,46 @@
+---
+import { getCollection } from "astro:content";
+import SectionHeading from "./SectionHeading.astro";
+import ProjectCard from "./ProjectCard.astro";
+
+const featured = (await getCollection("projects", ({ data }) => data.status === "featured")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const inProgress = await getCollection("projects", ({ data }) => data.status === "in-progress");
+---
+
+<section id="projects" class="mx-auto max-w-6xl scroll-mt-20 px-6 py-20 sm:py-28">
+  <div class="flex flex-wrap items-end justify-between gap-4">
+    <SectionHeading
+      eyebrow="Featured Projects"
+      title="Things I've genuinely built"
+      description="Real, working projects — not tutorial follow-alongs. Each one has a full write-up: the problem, the solution, and what I actually built."
+    />
+    <a href="/projects" class="reveal text-sm font-medium text-accent hover:underline">
+      View all projects &rarr;
+    </a>
+  </div>
+
+  <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      featured.map((project) => (
+        <ProjectCard
+          title={project.data.title}
+          tagline={project.data.tagline}
+          tech={project.data.tech}
+          href={`/projects/${project.id}`}
+        />
+      ))
+    }
+    {
+      inProgress.map((project) => (
+        <ProjectCard
+          title={project.data.title}
+          tagline={project.data.tagline}
+          href={`/projects/${project.id}`}
+          badge="In development"
+        />
+      ))
+    }
+  </div>
+</section>

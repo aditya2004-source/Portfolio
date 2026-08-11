@@ -1,0 +1,62 @@
+---
+import { site } from "../data/site";
+---
+
+<section id="home" class="border-b border-border bg-surface">
+  <div
+    class="mx-auto flex max-w-6xl flex-col-reverse items-center gap-12 px-6 py-20 sm:py-28 md:flex-row"
+  >
+    <div class="flex-1 text-center md:text-left">
+      <p class="reveal text-sm font-medium uppercase tracking-widest text-accent">
+        Hello, I'm
+      </p>
+      <h1 class="reveal mt-3 text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
+        {site.name}
+      </h1>
+      <p class="reveal mt-3 text-lg font-medium text-text-muted sm:text-xl">
+        {site.title}
+      </p>
+      <p class="reveal mx-auto mt-6 max-w-xl text-base leading-relaxed text-text-muted md:mx-0">
+        {site.tagline}
+      </p>
+
+      <div class="reveal mt-8 flex flex-wrap justify-center gap-3 md:justify-start">
+        <a
+          href="/projects"
+          class="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-accent"
+        >
+          View Projects
+        </a>
+        <a
+          href={site.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="rounded-full border border-border bg-paper px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:border-ink"
+        >
+          View GitHub
+        </a>
+        <a
+          href={site.resumeHref}
+          download
+          class="rounded-full border border-border bg-paper px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:border-ink"
+        >
+          Download Resume
+        </a>
+        <a
+          href="/#contact"
+          class="rounded-full border border-border bg-paper px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:border-ink"
+        >
+          Contact Me
+        </a>
+      </div>
+    </div>
+
+    <div class="reveal shrink-0">
+      <img
+        src="/profile.png"
+        alt={site.name}
+        class="h-40 w-40 rounded-full border border-border object-cover shadow-sm sm:h-52 sm:w-52"
+      />
+    </div>
+  </div>
+</section>

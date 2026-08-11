@@ -1,0 +1,25 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+import { skillGroups } from "../data/profile";
+---
+
+<section id="skills" class="mx-auto max-w-6xl scroll-mt-20 px-6 py-20 sm:py-28">
+  <SectionHeading eyebrow="Skills" title="What I work with" />
+
+  <div class="mt-10 grid gap-6 sm:grid-cols-2">
+    {
+      skillGroups.map((group) => (
+        <div class="reveal rounded-2xl border border-border p-6">
+          <p class="text-sm font-semibold text-ink">{group.category}</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            {group.skills.map((skill) => (
+              <span class="rounded-full bg-accent-soft px-3 py-1 text-xs font-medium text-accent">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
